@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Dom</title>
+</head>
+
+<body>
+    <div class="header">
+        <h2>Rock Paper Scissors Game</h2>
+    </div>
+    <div class="container">
+        <button class="button" id="rock">Rock</button>
+        <button class="button" id="paper">Paper</button>
+        <button class="button" id="sci">Scissors</button>
+        <p>Player one move: <span class="display" id="playerOneMove">  </span></p>
+        <p>Your  move: <span class="display" id="playerTwoMove">  </span></p>
+        <p>Score: <span class="display" id="score">0</span></p>
+        <div class="break"></div>
+        <p>Result: <span class="display" id="winner">0</span></p>
+        <div>
+            <p >Total: <span class="display" id="total-score"></span> </p>
+        </div>
+        <div>
+            <p id="result"> </p>
+        </div>
+    </div>
+  
+   <footer class="message">
+       May The Odds Be With You !  
+   </footer>
+    <script>
+        let buttons = document.querySelectorAll("button");
+
+        function getRandomInt(num) {
+            return Math.floor(Math.random() * Math.floor(num));
+        }
+        const eventListener = (e) => {
+            e.preventDefault;
+            let choice = e.target.textContent;
+            console.log(choice);
+            let winner = document.querySelector('#winner')
+
+            const choices = ['rock', 'paper', 'scissors'];
+            const score = [0 , 0];
+            let playerOneMove = choices[getRandomInt(3)];//computer
+            let playerOne = document.querySelector("#playerOneMove");
+            playerOne.textContent = playerOneMove;
+            
+            let playerTwoMove = choice.toLowerCase();
+
+            let playerTwo = document.querySelector("#playerTwoMove");
+            playerTwo.textContent = playerTwoMove;
+
+            let result = document.querySelector("#result");
+            let total_score = document.querySelector("#total-score");
+            let total_scoree = [0,0];
+
+            if ((playerOneMove === "rock" && playerTwoMove === "scissors") || (playerOneMove === "scissors" && playerTwoMove === "paper") || (playerOneMove === "paper" && playerTwoMove === "rock")) {
+                score[0] = 1;
+                console.log('player one won');
+                winner.textContent = 'Player one won';
+                result.textContent = 'You Loose  !';
+                total_scoree[0] = total_scoree[0] + 1;
+                total_score.textContent = total_scoree;
+
+            } else if ((playerOneMove === "rock" && playerTwoMove === "paper") || (playerOneMove === "paper" && playerTwoMove === "scissors") || (playerOneMove === "scissors" && playerTwoMove === "rock")) {
+                score[1] = 1; 
+                console.log('player two won');
+                winner.textContent = 'Player two won';
+                result.textContent = 'You Win !';
+                total_scoree[1] = total_scoree[1] + 1;
+                total_score.textContent = total_scoree;
+
+            } else {
+                score[0] = score[1] = 0;
+                console.log('Draw');
+                winner.textContent = 'Draw';
+                result.textContent = '';
+            }
+
+            console.log(`player one : ${playerOneMove} \nplayer two : ${playerTwoMove} \nscore : ${score}`);
+            let scoree = document.querySelector('#score');
+            scoree.textContent = score;
+
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', eventListener)
+
+        });
+
+        // for (let i = 0; i < buttons.length; i += 1) {     
+        //         var id = buttons[i].getAttribute('id');
+        //         // console.log(id); 
+
+        //         const choice = (id) => {
+        //             switch (id) {
+        //                 case 'rock':
+        //                     choice = 'rock';
+        //                     console.log(choice);
+        //                 case 'paper':
+        //                     choice = 'paper';
+        //                     console.log(choice);
+        //                 case 'sci':
+        //                     choice = 'scisors';
+        //                     console.log(choice);
+        //                 default:    
+        //             return choice;        
+        //             }  
+
+
+        //     id.addEventListener('click', choice(id));
+        //         }
+        // }
+
+    </script>
+</body>
+
+</html>
